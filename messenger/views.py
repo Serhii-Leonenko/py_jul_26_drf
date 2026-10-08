@@ -1,21 +1,41 @@
 from rest_framework import status
-from rest_framework.decorators import api_view
+
 from rest_framework.request import Request
 from rest_framework.response import Response
-from messenger.models import Message
-from messenger.serializers import MessageSerializer
+from rest_framework.views import APIView
+
+from messenger.models import Message, Tag
+from messenger.serializers import MessageSerializer, TagSerializer
 
 
-@api_view(["GET", "POST"])
-def message_list(request: Request) -> Response:
-    if request.method == "GET":
+class MessageView(APIView):
+    def get(self, request: Request):
         messages = Message.objects.all()
         serializer = MessageSerializer(messages, many=True)
 
         return Response(serializer.data, status=status.HTTP_200_OK)
 
-    if request.method == "POST":
+    def post(self, request: Request):
         serializer = MessageSerializer(data=request.data)
+
+        serializer.is_valid(raise_exception=True)
+        serializer.save()
+
+        return Response(
+            serializer.data,
+            status=status.HTTP_201_CREATED
+        )
+
+
+class TagView(APIView):
+    def get(self, request: Request):
+        tags = Tag.objects.all()
+        serializer = TagSerializer(tags, many=True)
+
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def post(self, request: Request):
+        serializer = TagSerializer(data=request.data)
 
         serializer.is_valid(raise_exception=True)
         serializer.save()
