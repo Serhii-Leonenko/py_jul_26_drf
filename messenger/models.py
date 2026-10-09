@@ -5,6 +5,10 @@ class Message(models.Model):
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+    @property
+    def text_preview(self):
+        return self.text[:20] + "..."
+
     def __str__(self):
         return self.text
 
