@@ -1,3 +1,4 @@
+from datetime import timedelta
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -129,7 +130,7 @@ REST_FRAMEWORK = {
     ],
     'DEFAULT_AUTHENTICATION_CLASSES': [
         'rest_framework.authentication.SessionAuthentication',
-        'rest_framework.authentication.TokenAuthentication',
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
     'DEFAULT_PERMISSION_CLASSES': [
         'rest_framework.permissions.IsAuthenticated',
@@ -142,9 +143,30 @@ AUTH_USER_MODEL = "users.User"
 MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 
-# SPECTACULAR_SETTINGS = {
-#     'TITLE': 'Messenger API',
-#     'DESCRIPTION': 'Messenger',
-#     'VERSION': '1.0.0',
-#     'SERVE_INCLUDE_SCHEMA': False,
+SPECTACULAR_SETTINGS = {
+    'TITLE': 'Messenger API',
+    'DESCRIPTION': 'Messenger',
+    'VERSION': '1.0.0',
+    'SERVE_INCLUDE_SCHEMA': False,
+}
+
+# CSP_DEFAULT_SRC = ("'self'", "cdn.jsdelivr.net")
+# CSP_WORKER_SRC = ("'self'", "blob:")
+# CSP_IMG_SRC = ("'self'", "data:", "cdn.redoc.ly")
+# CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "fonts.googleapis.com")
+# CSP_FONT_SRC = ("'self'", "fonts.gstatic.com")
+#
+# SECURE_CSP  = {
+#     "default-src": CSP_DEFAULT_SRC,
+#     "worker-src": CSP_WORKER_SRC,
+#     "img-src": CSP_IMG_SRC,
+#     "style-src": CSP_STYLE_SRC,
+#     "font-src": CSP_FONT_SRC,
 # }
+
+SIMPLE_JWT = {
+	"ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
+	"REFRESH_TOKEN_LIFETIME": timedelta(weeks=1),
+	"ROTATE_REFRESH_TOKENS": True
+}
+
