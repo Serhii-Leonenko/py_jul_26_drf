@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "django_filters",
     "drf_spectacular",
+    'django_celery_beat',
     # local
     "messenger",
     "users",
@@ -150,23 +151,14 @@ SPECTACULAR_SETTINGS = {
     'SERVE_INCLUDE_SCHEMA': False,
 }
 
-# CSP_DEFAULT_SRC = ("'self'", "cdn.jsdelivr.net")
-# CSP_WORKER_SRC = ("'self'", "blob:")
-# CSP_IMG_SRC = ("'self'", "data:", "cdn.redoc.ly")
-# CSP_STYLE_SRC = ("'self'", "'unsafe-inline'", "fonts.googleapis.com")
-# CSP_FONT_SRC = ("'self'", "fonts.gstatic.com")
-#
-# SECURE_CSP  = {
-#     "default-src": CSP_DEFAULT_SRC,
-#     "worker-src": CSP_WORKER_SRC,
-#     "img-src": CSP_IMG_SRC,
-#     "style-src": CSP_STYLE_SRC,
-#     "font-src": CSP_FONT_SRC,
-# }
-
 SIMPLE_JWT = {
 	"ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
 	"REFRESH_TOKEN_LIFETIME": timedelta(weeks=1),
 	"ROTATE_REFRESH_TOKENS": True
 }
 
+# CELERY
+CELERY_TIMEZONE = "Europe/Kyiv"
+CELERY_TASK_TRACK_STARTED = True
+CELERY_TASK_TIME_LIMIT = 30 * 60
+CELERY_BROKER_URL = "redis://localhost:6379/0"
