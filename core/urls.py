@@ -14,4 +14,4 @@ urlpatterns = [
     path('schema/', SpectacularAPIView.as_view(), name='schema'),
     path('docs/redoc/', SpectacularRedocView.as_view(url_name='schema'), name='redoc'),
     path('docs/', SpectacularSwaggerView.as_view(url_name='schema'), name='swagger'),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) + debug_toolbar_urls()

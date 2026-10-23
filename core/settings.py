@@ -1,5 +1,5 @@
-from datetime import timedelta
 from pathlib import Path
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -14,7 +14,7 @@ SECRET_KEY = "django-insecure-vb7$o#fg=5!s-$q2^bvvhlrvv1g2q-w!e75!a#f8*^k0w^-1xg
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["0.0.0.0", "127.0.0.1"]
 
 
 # Application definition
@@ -29,16 +29,20 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     # third party
     "rest_framework",
+    "messenger",
     "django_filters",
     "drf_spectacular",
     'django_celery_beat',
     # local
     "messenger",
     "users",
+    "debug_toolbar"
 ]
 
 MIDDLEWARE = [
     "django.middleware.security.SecurityMiddleware",
+    "debug_toolbar.middleware.DebugToolbarMiddleware",
+    "base.middlewares.NeverCacheMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.csrf.CsrfViewMiddleware",
@@ -150,6 +154,18 @@ SPECTACULAR_SETTINGS = {
     'VERSION': '1.0.0',
     'SERVE_INCLUDE_SCHEMA': False,
 }
+
+# CACHE
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+    }
+}
+
+INTERNAL_IPS = [
+    "127.0.0.1",
+]
 
 SIMPLE_JWT = {
 	"ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),

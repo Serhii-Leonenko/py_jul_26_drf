@@ -1,3 +1,5 @@
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
 from rest_framework import viewsets, filters
 from django_filters import rest_framework as rest_filters
 from rest_framework.decorators import action
@@ -42,6 +44,7 @@ class MessageViewSet(viewsets.ModelViewSet):
         serializer.save(user=self.request.user)
 
 
+@method_decorator(cache_page(60 * 15, key_prefix="tags"), name="list")
 class TagViewSet(viewsets.ModelViewSet):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
