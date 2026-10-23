@@ -1,7 +1,7 @@
 from django.db import transaction
 from rest_framework import serializers
 
-from messenger.models import Message, Tag, MessageImage
+from messenger.models import Message, MessageImage, Tag
 from users.serializers import UserSerializer
 
 
@@ -52,13 +52,7 @@ class MessageListSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Message
-        fields = (
-            "id",
-            "created_at",
-            "text_preview",
-            "user",
-            "images"
-        )
+        fields = ("id", "created_at", "text_preview", "user", "images")
 
 
 class MessageDetailSerializer(serializers.ModelSerializer):

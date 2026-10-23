@@ -1,18 +1,17 @@
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
-from rest_framework import viewsets, filters
 from django_filters import rest_framework as rest_filters
-from rest_framework.decorators import action
-from rest_framework.response import Response
+from rest_framework import filters, viewsets
 
 from messenger.filters import MessageFilter
 from messenger.models import Message, Tag
 from messenger.pagination import MessagePagination
 from messenger.serializers import (
+    MessageCreateSerializer,
+    MessageDetailSerializer,
+    MessageListSerializer,
     MessageSerializer,
     TagSerializer,
-    MessageListSerializer,
-    MessageDetailSerializer, MessageCreateSerializer,
 )
 
 

@@ -1,5 +1,5 @@
-from pathlib import Path
 from datetime import timedelta
+from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -29,14 +29,13 @@ INSTALLED_APPS = [
     "rest_framework.authtoken",
     # third party
     "rest_framework",
-    "messenger",
     "django_filters",
     "drf_spectacular",
     "django_celery_beat",
+    "debug_toolbar",
     # local
     "messenger",
     "users",
-    "debug_toolbar"
 ]
 
 MIDDLEWARE = [
@@ -133,14 +132,14 @@ REST_FRAMEWORK = {
         "rest_framework.renderers.JSONRenderer",
         "rest_framework.renderers.BrowsableAPIRenderer",
     ],
-    'DEFAULT_AUTHENTICATION_CLASSES': [
-        'rest_framework.authentication.SessionAuthentication',
+    "DEFAULT_AUTHENTICATION_CLASSES": [
+        "rest_framework.authentication.SessionAuthentication",
         "rest_framework_simplejwt.authentication.JWTAuthentication",
     ],
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+    "DEFAULT_PERMISSION_CLASSES": [
+        "rest_framework.permissions.IsAuthenticated",
     ],
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DEFAULT_SCHEMA_CLASS": "drf_spectacular.openapi.AutoSchema",
 }
 
 AUTH_USER_MODEL = "users.User"
@@ -149,10 +148,10 @@ MEDIA_ROOT = BASE_DIR / "media"
 MEDIA_URL = "/media/"
 
 SPECTACULAR_SETTINGS = {
-    'TITLE': 'Messenger API',
-    'DESCRIPTION': 'Messenger',
-    'VERSION': '1.0.0',
-    'SERVE_INCLUDE_SCHEMA': False,
+    "TITLE": "Messenger API",
+    "DESCRIPTION": "Messenger",
+    "VERSION": "1.0.0",
+    "SERVE_INCLUDE_SCHEMA": False,
 }
 
 # CACHE
@@ -168,9 +167,9 @@ INTERNAL_IPS = [
 ]
 
 SIMPLE_JWT = {
-	"ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
-	"REFRESH_TOKEN_LIFETIME": timedelta(weeks=1),
-	"ROTATE_REFRESH_TOKENS": True
+    "ACCESS_TOKEN_LIFETIME": timedelta(minutes=1),
+    "REFRESH_TOKEN_LIFETIME": timedelta(weeks=1),
+    "ROTATE_REFRESH_TOKENS": True,
 }
 
 # CELERY

@@ -29,8 +29,6 @@ class Tag(models.Model):
 
 class MessageImage(models.Model):
     message = models.ForeignKey(
-        Message,
-        on_delete=models.CASCADE,
-        related_name="images"
+        Message, on_delete=models.CASCADE, related_name="images"
     )
     image = models.ImageField(upload_to="media/")
